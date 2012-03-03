@@ -13,8 +13,7 @@ import android.widget.Button;
 public class MenuPpal extends Activity{
 	//Inicializamos los botones de la interfaz
 	Button btn_nueva_lista;
-	Button btn_comprar;
-	Button btn_consultar_lista;
+	Button btn_mis_listas;
 	Button btn_settings;
 
     @Override
@@ -25,11 +24,9 @@ public class MenuPpal extends Activity{
         setContentView(R.layout.menu_ppal); 
         // preparamos los botones
     	btn_nueva_lista=(Button)findViewById(R.id.Btn_nueva_lista);
-    	btn_comprar=((Button)findViewById(R.id.Btn_comprar));
-    	btn_consultar_lista=((Button)findViewById(R.id.Btn_consultar_lista));
+    	btn_mis_listas=((Button)findViewById(R.id.Btn_mis_listas));
     	btn_settings = (Button)findViewById(R.id.Btn_settings);
         this.btn_nueva_lista.setOnClickListener(new OnClickListener() {
-            @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(MenuPpal.this, NuevaLista.class);
               /*
@@ -38,6 +35,12 @@ public class MenuPpal extends Activity{
                 bundle.putString("NOMBRE", txtNombre.getText().toString());
                 intent.putExtras(bundle);
                */
+                startActivity(intent);
+            }
+        });
+        this.btn_settings.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+                Intent intent = new Intent(MenuPpal.this, Configuracion.class);
                 startActivity(intent);
             }
         });

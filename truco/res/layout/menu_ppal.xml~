@@ -14,11 +14,15 @@
         android:text="@string/nueva_lista" />
 
 	<Button
-	    android1:id="@+id/Btn_mis_listas"
+	    android1:id="@+id/Btn_consultar_lista"
 	    android1:layout_width="fill_parent"
 	    android1:layout_height="wrap_content"
 	    android1:text="@string/consultar_lista" />
 
+	<Button android:id="@+id/Btn_comprar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/comprar" />
 	<Button android:id="@+id/Btn_settings"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
