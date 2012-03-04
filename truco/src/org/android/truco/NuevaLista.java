@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import org.android.db.Lista;
+import org.android.db.ListaDB;
 
 
 //TODO: marcar con un * todos los campos que sean obligatorios
@@ -25,10 +25,13 @@ public class NuevaLista extends Activity{
     EditText nombre;
     EditText notas;
     ListaDB lista;
-	@Override
+    final String LOG_TAG = "NuevaLista";  
+    @Override
     public void onCreate(Bundle savedInstanceState) {
-	       final String LOG_TAG = "NuevaLista";  
         super.onCreate(savedInstanceState);
+    	Log.v(LOG_TAG,"on create");
+        //Abrimos la base de datos
+        lista.open();
         setContentView(R.layout.nueva_lista);
         //Inicializamos la base de datos
    //esperamos a que nos pulsen el boton guardar
@@ -37,7 +40,6 @@ public class NuevaLista extends Activity{
         notas = (EditText)findViewById(R.id.TxtNotas);
 
         this.guardar.setOnClickListener(new OnClickListener() {
-            @Override
             public void onClick(View arg0) {
             	try{
             		guardarLista();
@@ -81,6 +83,7 @@ public class NuevaLista extends Activity{
         mensajeOk.show();				
 	}
     private void guardarLista(){
+    	//Abrimos la base de datos
     	//Comprobamos que podemos hacer el guardado
     	// validar campos
     	if (!this.validarCampos())
@@ -88,8 +91,10 @@ public class NuevaLista extends Activity{
 			this.mostrarAlerta(R.string.obligatorio);   		
     	}
     	Log.e("insertando","Nombre: "+this.nombre.getText().toString()+" nota: "+this.notas.getText().toString());
-    	lista.insertlista(this.nombre.getText().toString(),this.notas.getText().toString());
+    	long id = lista.insertLista(nombre.getText().toString(), notas.getText().toString());
     	mostrarMensaje(R.string.add_lista_ok);
+    	//Cerramos la base de datos
+    	
     }
     private boolean validarCampos() {
 		// TODO Auto-generated method stub
@@ -99,6 +104,7 @@ public class NuevaLista extends Activity{
 	}
 	@Override
     protected void onDestroy() {
+		this.lista.close();
         super.onDestroy();
     }
 }

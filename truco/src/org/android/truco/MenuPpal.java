@@ -1,10 +1,10 @@
 package org.android.truco;
 
-import org.android.db.DBHelper;
+//import org.android.db.DBHelper;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+//import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,8 +19,8 @@ public class MenuPpal extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);	
-		DBHelper helper = new DBHelper(getBaseContext());
-		SQLiteDatabase db = helper.getWritableDatabase();
+		//DBHelper helper = new DBHelper(getBaseContext());
+		//SQLiteDatabase db = helper.getWritableDatabase();
         setContentView(R.layout.menu_ppal); 
         // preparamos los botones
     	btn_nueva_lista=(Button)findViewById(R.id.Btn_nueva_lista);

@@ -10,9 +10,8 @@ import android.util.Log;
 //Esta clase maneja toda la base de datos en conjunto... Cada tabla se manejará en una clase aparte
 public class DBHelper extends SQLiteOpenHelper{
 	private Context mCtx = null;
-	private static final String DB_NAME = "truco";
+	private static final String DB_NAME = "truco_db";
 	private static final int DB_version = 1;
-	private SQLiteDatabase db=null;
 
     //Sentencia SQL para crear las tablas de la base de datos
     private String[] sqlCreate = 
@@ -44,9 +43,9 @@ public class DBHelper extends SQLiteOpenHelper{
 	*/
 	public DBHelper(Context context) {	 
 		super(context, DB_NAME, null, DB_version);
-		Log.i("DBHelper","Creando la base de datos");
+		Log.i("DBHelper","Creando la base de datos"+DB_NAME);
 	}
-	private void createTables(SQLiteDatabase db){
+	public void createTables(SQLiteDatabase db){
 		for (String a:this.sqlCreate)
 		{
 			Log.i("CreateTables",a);
@@ -63,7 +62,7 @@ public class DBHelper extends SQLiteOpenHelper{
 	    values.put("nota", "nota2");
 	    db.insert("lista", null, values);
 	}
-	private void deleteTables(SQLiteDatabase db){
+	public void deleteTables(SQLiteDatabase db){
 		for (String a:this.sqlDelete)
 		{
 			db.execSQL(a);
@@ -71,6 +70,7 @@ public class DBHelper extends SQLiteOpenHelper{
 	}
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		Log.i("DBHelper","Oncreate");
 		createTables(db); 
 	}
 	@Override
@@ -78,9 +78,5 @@ public class DBHelper extends SQLiteOpenHelper{
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		deleteTables(db);
 		createTables(db);		
-	}
-	public DBHelper open () throws SQLException{
-		this.getWritableDatabase();
-		return this;
 	}
 }

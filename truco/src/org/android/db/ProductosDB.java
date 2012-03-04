@@ -1,5 +1,9 @@
 package org.android.db;
 
+/*
+ * 
+ * Roberto.. lo comento para poder probar el resto.. iba a arreglarlo.. pero te lo dejo a ti xD xD
+ * Asi que mañana descomenta y listo ;)
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +15,14 @@ import android.util.Log;
 
 public class ProductosDB extends DBHelper {
 
+	public ProductosDB(Context context) {
+		super(context);
+	}
 	private SQLiteDatabase db;
 	private String DATABASE_TABLE = "Productos";
 	private Context ctx;
 
-	public ProductosDB(Context context) {
-		this.ctx= context;
-	}
+
 	//Establecemos los nombres de las columnas
 	public static final String KEY_ID = "_id";
 	public static final String KEY_ID_lista = "_id_lista";
@@ -33,6 +38,8 @@ public class ProductosDB extends DBHelper {
  * Restricciones de la tabla Producto
  * 1. El nombre debe ser unico
  */
+
+/*
 	public boolean productoCorrecto(String nombre)
 	{
 		//Obtenemos todas los productos
@@ -51,6 +58,7 @@ public class ProductosDB extends DBHelper {
 	/**
 	* INSERTAR NUEVO producto
 	* */
+/*
 	public long insertProdcuto(String nombre, String nota) 
 	{
 		Log.v("insertando en lista",nombre+" "+nota);
@@ -65,6 +73,7 @@ public class ProductosDB extends DBHelper {
 	/**
 	* BORRAR producto que tenga el identificador _id
 	* */
+/*
 	public boolean removeProducto(long _id) {
 		return db.delete(DATABASE_TABLE, KEY_ID + "=" + _id, null) > 0;
 	}
@@ -72,6 +81,7 @@ public class ProductosDB extends DBHelper {
 	/**
 	* ACTUALIZAR la lista con el _id indicado
 	* */
+/*
 	public boolean updateProdcuto(Integer _id, String nombre, String nota) 
 	{
 		ContentValues newValues = new ContentValues();
@@ -133,3 +143,4 @@ public class ProductosDB extends DBHelper {
 		return productos;
 	} 	
 }
+*/

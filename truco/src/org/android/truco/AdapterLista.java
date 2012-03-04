@@ -1,47 +1,96 @@
 package org.android.truco;
 import java.util.List;
 
-import org.android.db.*;
+import org.android.db.Lista;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class AdapterLista extends BaseAdapter {
+        
+        // private objects
+        private List<Lista> mLista;
+        private LayoutInflater mInflater;
+        
+        /*
+         * constructor
+         */
+        public AdapterLista(Context c, List<Lista> list) {        
+                mLista = list;           
+                // create layout inflater
+                mInflater = LayoutInflater.from(c);
+        }
+        
+        /*
+         * (non-Javadoc)
+         * @see android.widget.Adapter#getCount()
+         */
+        public int getCount() {
+                return mLista.size();
+        }
 
-    private Context mContext;
-    private List<Lista> elements;
+        /*
+         * (non-Javadoc)
+         * @see android.widget.Adapter#getItem(int)
+         */
+        public Object getItem(int position) {
+                return mLista.get(position);
+        }
 
-    public AdapterLista (Context mContext) {
-        this.mContext = mContext;
-        ListaDB l = new ListaDB(mContext);
-        elements =l.getListas();
-    }
+        /*
+         * (non-Javadoc)
+         * @see android.widget.Adapter#getItemId(int)
+         */
+        public long getItemId(int position) {
+                return position;
+        }
 
-public int getCount() {
-        return elements.size();
-}
+        /*
+         * (non-Javadoc)
+         * @see android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup)
+         */
+        public View getView(int position, View convertView, ViewGroup parent) {
+                // get view reference
+                View view = convertView;
+                // if null 
+                if(view == null) {
+                        // inflate new layout
+                        view = mInflater.inflate(R.layout.fila, null);
+                        // create a holder
+                        ViewHolder holder = new ViewHolder();
+                        // find controls
+                        holder.nombreLista = (TextView)view.findViewById(R.id.nombreLista);
+                        holder.notaLista = (TextView)view.findViewById(R.id.notaLista);
+                        // set data structure to view
+                        view.setTag(holder);
+                }
+                
+                // get selected user info
+                Lista Lista = mLista.get(position);
+                // if not null
+                if(Lista != null) {
+                        // query data structure
+                        ViewHolder holder = (ViewHolder)view.getTag();
+                        // set data to display
+                        holder.nombreLista.setText(Lista.getNombre());
+                        holder.notaLista.setText(Lista.getNota());
+                }               
+                
+                // return view
+                return view;
+        }
 
-public Lista getItem(int position) {
-        return (Lista)elements.get(position);
-}
-
-public long getItemId(int position) {
-		return this.elements.get(position).getId();
-}
-
-public View getView(int position, View convertView, ViewGroup parent) {
-        Lista item = elements.get(position);
-
-        View v = View.inflate(mContext,R.layout.fila, null);
-
-        TextView nombre = (TextView)v.findViewById(R.id.nombreLista);
-        nombre.setText(item.getNombre());
-        TextView notas = (TextView)v.findViewById(R.id.notaLista);
-        notas.setText(item.getNota());
-        return v;
-}
-
+        /*
+         * @class ViewHolder
+         * to hold data structure on view with user info
+         */
+        static class ViewHolder {
+                private TextView nombreLista;
+                private TextView notaLista;
+                //TODO: cantidad de productos
+        }
 }
